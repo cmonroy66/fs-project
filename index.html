@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Elemento principal del documento.
+ lang="es" indica que el contenido está en español -->
+
+<head>
+    <!-- Contiene información de configuración de la pagina -->
+
+    <meta charset="UTF-8">
+    <!-- Permite mostrar correctamente caracteres especiales como tíldes, ñ y símbolos  -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Permite que la página se adapte correctamente 
+     a computadoras, tablets y celulares -->
+
+    <title>Task Manager</title>
+    <!-- Texto que aparecerá en la pestaña del navegador -->
+
+    <style>
+        
+        /* Estilos general de toda la página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos del campo donde se encuentra la tarea */
+        input {
+            padding: 10px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Estilos general de la lista de tareas */
+        ul {
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            list-style: none;
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 8px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Estilos del botón eliminar */
+        .delete-btn {
+            padding: 6px 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Aquí se colocará todo el contenido visible de la página -->
+    <h1>Task Manager</h1>
+    <input 
+        type="text" 
+        id="taskInput" 
+        placeholder="escribe una tarea"
+    >
+    <button id="addTaskBtn">Agregar Tarea</button>
+    <ul id="taskList">
+        
+    </ul>
+    <script>
+        // Obtener referencias a los elementos del DOM
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+        const addTask = () => {
+            const taskText = taskInput.value.trim();
+            if (taskText === "") {
+                return;
+            }
+            const li = document.createElement('li');
+            const taskSpan = document.createElement('span');
+            taskSpan.textContent = taskText;
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Eliminar';
+            deleteBtn.textContent = 'Eliminar';
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.addEventListener('click', () => {
+                li.remove();
+            });
+            li.appendChild(taskSpan);
+            li.appendChild(deleteBtn);
+            
+            taskList.appendChild(li);
+            taskInput.value = "";
+            taskInput.focus();
+            
+        };
+
+    addTaskBtn.addEventListener('click', addTask);
+    taskInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            addTask();
+        }
+    });
+
+    </script>
+</body>
+</html>
+
+ <!-- Fin del documento HTML -->
